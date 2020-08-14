@@ -6,15 +6,26 @@ import codecs
 def main():
     # sourceFolder = "D:\\Users\\idodo\OneDrive - mail.tau.ac.il\\My Music\\MusicBee\\Ido's Library\\Exported Playlists"
     # dstFolder = "C:\\Users\\idodo\\Desktop\\test"
-    sourceFolder = input("Specify source folder: ")
+    sourceFolder = input("Specify source folder or source file: ")
+    print(sourceFolder)
     dstFolder = input("Specify destination folder: ")
+    print(dstFolder)
     filepaths = list()
-    for file in os.listdir(sourceFolder):
-        if file.endswith(".m3u"):
-            filepath = os.path.join(sourceFolder, file)
-            filename = os.path.basename(filepath)
-            filename = os.path.splitext(filename)[0]
-            filepaths.append((filepath, filename))
+
+    if os.path.isfile(sourceFolder) & sourceFolder.endswith(".m3u"):
+        filepath = sourceFolder
+        filename = os.path.basename(filepath)
+        filename = os.path.splitext(filename)[0]
+        filepaths.append((filepath, filename))
+    elif os.path.isdir(sourceFolder):
+        for file in os.listdir(sourceFolder):
+            if file.endswith(".m3u"):
+                filepath = os.path.join(sourceFolder, file)
+                filename = os.path.basename(filepath)
+                filename = os.path.splitext(filename)[0]
+                filepaths.append((filepath, filename))
+    else:
+        print("Invalid source folder / source file")
 
     for (filepath, playlistName) in filepaths:
         try:
@@ -30,8 +41,8 @@ def main():
         for i in range(len(files)):
             filepath = files[i].strip("\n").strip("\r").strip("\xed")
             filename = os.path.basename(filepath)
-            filename = filename.split(' ', 1)[1] # removes the current numbering from file name
-            filename = str(i+1).zfill(2) + " " + filename # adds new numbering to the beginning
+            filename = filename.split(' ', 1)[1]  # removes the current numbering from file name
+            filename = str(i + 1).zfill(2) + " " + filename  # adds new numbering to the beginning
             dstPath = os.path.join(dstFolder, playlistName)
             if not os.path.exists(dstPath):
                 try:
