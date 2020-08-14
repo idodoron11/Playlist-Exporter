@@ -1,10 +1,10 @@
 # M3U Playlist Export Script
 
-This is a small python script that can scan a m3u playlist and copy all the songs in the same order to a new location, specified by the use. It is designed for personal use, so it might need some adjustments before running. The script encodes and decodes filename using UTF-8, so most of the languages are supported.
+This is a small python script that can scan a m3u playlist and copy all its songs to a new location, keeping the files in the same order as in the playlist. It is designed for personal use, so it might need some adjustments before running. It encodes and decodes filenames using UTF-8, so most of the languages are supported.
 
 ## How To Use The Script
 
-When running the script, it will ask you to provide to parameters:
+When running the script, it asks you to provide two parameters:
 
 * **Source** - a path to a m3u playlist or a path to some directory.
 * **Target** - a path to a destination folder.
